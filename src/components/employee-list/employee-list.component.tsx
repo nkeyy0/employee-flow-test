@@ -1,14 +1,16 @@
 import React, { FC } from 'react';
-import useEmployeeList from '../../hooks/useEmployeeList';
+import { Error } from '../../common/components/error';
+import { Progress } from '../../common/components/progress';
+import useEmployeeList from '../../hooks/use-employee-list.hook';
 import { EmployeeTable } from '../employee-table';
 
 const EmployeeListComponent: FC = () => {
   const [rows, loading, error] = useEmployeeList();
   if (loading) {
-    return <div>Loading...</div>;
+    return <Progress />;
   }
   if (error) {
-    return <div>Something went wrong</div>;
+    return <Error />;
   }
   return <EmployeeTable rows={rows} />;
 };

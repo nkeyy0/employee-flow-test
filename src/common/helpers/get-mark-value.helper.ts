@@ -1,6 +1,6 @@
 import { Mark } from '@material-ui/core';
 
 export const getMarkValue = (marks: Mark[], label: string): number => {
-  const index = marks.findIndex((mark) => mark.label === label);
-  return marks[index]?.value || 0;
+  const foundMark = marks.find((mark) => mark.label === label);
+  return foundMark?.value || 0;
 };

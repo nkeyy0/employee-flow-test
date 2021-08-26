@@ -15,7 +15,7 @@ import Styled from './edit-status-dialog.styles';
 import { EmployeeStatus } from '../../../../common/constants/employee-status.enum';
 import { CONFIG } from '../../../../common/constants/config';
 import { ApiRoutes } from '../../../../common/constants/api-routes.enum';
-import { getMarkValue } from '../../../../common/helpers/getMarkValue';
+import { getMarkValue } from '../../../../common/helpers/get-mark-value.helper';
 import { Employee } from '../../../../common/interfaces/employee.interface';
 
 const marks: Mark[] = [
@@ -41,7 +41,7 @@ const marks: Mark[] = [
   },
 ];
 
-function valuetext(value: number) {
+function valueText(value: number) {
   return `${value}`;
 }
 
@@ -57,7 +57,7 @@ const EditStatusDialogComponent: FC<EditStatusDialogProps> = ({
   onStatusChange,
 }) => {
   const [mark, setMark] = useState(status);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
   useEffect(() => {
     const fetchStatus = async () => {
@@ -73,7 +73,7 @@ const EditStatusDialogComponent: FC<EditStatusDialogProps> = ({
         } = result;
         onStatusChange(changedStatus);
       } catch (error) {
-        setSnackbarOpen(true);
+        setIsSnackbarOpen(true);
       }
     };
     fetchStatus();
@@ -88,14 +88,10 @@ const EditStatusDialogComponent: FC<EditStatusDialogProps> = ({
   };
 
   const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
+    setIsSnackbarOpen(false);
   };
   return (
-    <Styled.Dialog
-      open={open}
-      onClose={onClose}
-      fullWidth
-    >
+    <Styled.Dialog open={open} onClose={onClose} fullWidth>
       <Styled.DialogTitle>
         <Typography variant="h6">Change status</Typography>
         <IconButton onClick={onClose}>
@@ -104,7 +100,7 @@ const EditStatusDialogComponent: FC<EditStatusDialogProps> = ({
       </Styled.DialogTitle>
       <Styled.DialogContent>
         <Snackbar
-          open={snackbarOpen}
+          open={isSnackbarOpen}
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           autoHideDuration={2000}
           message="Something went wrong"
@@ -116,7 +112,7 @@ const EditStatusDialogComponent: FC<EditStatusDialogProps> = ({
           min={0}
           max={4}
           valueLabelFormat={valueLabelFormat}
-          getAriaValueText={valuetext}
+          getAriaValueText={valueText}
           onChangeCommitted={handleSliderChange}
         />
       </Styled.DialogContent>
