@@ -1,0 +1,46 @@
+{
+  "employees": [
+    {
+      "id": "1",
+      "firstName": "Nikita",
+      "lastName": "Komkov",
+      "company": "Itechart",
+      "status": "APPROVED"
+    },
+    {
+      "id": "2",
+      "firstName": "Andrey",
+      "lastName": "Dobrovolsky",
+      "company": "Unknown",
+      "status": "INACTIVE"
+    },
+    {
+      "id": "3",
+      "firstName": "Artyom",
+      "lastName": "Balyabin",
+      "company": "A1QA",
+      "status": "IN-CHECK"
+    },
+    {
+      "id": "4",
+      "firstName": "Dianis",
+      "lastName": "Latyshev",
+      "company": "Itechart",
+      "status": "APPROVED"
+    },
+    {
+      "id": "5",
+      "firstName": "Olya",
+      "lastName": "Kachanove",
+      "company": "Unknown",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "6",
+      "firstName": "Lena",
+      "lastName": "Repina",
+      "company": "EPAM",
+      "status": "ACTIVE"
+    }
+  ]
+}
