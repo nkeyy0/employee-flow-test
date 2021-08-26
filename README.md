@@ -2,7 +2,7 @@
 
 1. yarn global add json-server
 2. move to ./server folder
-3. Start json server with following command: json-server --watch db.json
+3. Start json server with following command: json-server --watch db.json --port 5000
 
 # Start project with yarn 
 

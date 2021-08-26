@@ -5,7 +5,7 @@ import { EmployeeTableBodyProps } from './employee-table-body.interface';
 
 const EmployeeTableBodyComponent: FC<EmployeeTableBodyProps> = ({ rows }) => (
   <TableBody>
-    {rows?.map?.(({
+    {rows.map(({
       id, firstName, lastName, company, status,
     }) => (
       <EmployeeRow

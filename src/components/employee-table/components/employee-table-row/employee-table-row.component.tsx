@@ -12,26 +12,26 @@ const EmployeeRowComponent: FC<EmployeeTableRowProps> = ({
   status,
   userId,
 }) => {
-  const [open, setOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [employeeStatus, setEmployeeStatus] = useState(status);
   const handleEditClick = () => {
-    setOpen(true);
+    setIsDialogOpen(true);
   };
   const handleDialogClose = () => {
-    setOpen(false);
+    setIsDialogOpen(false);
   };
   const handleStatusChange = (changedStatus: string) => {
     setEmployeeStatus(changedStatus);
   };
   return (
-    <TableRow key={firstName + lastName}>
+    <TableRow key={userId}>
       <TableCell>{firstName}</TableCell>
       <TableCell>{lastName}</TableCell>
       <TableCell>{company}</TableCell>
       <TableCell>
         <Styled.CellWrapper>
           <EditStatusDialog
-            open={open}
+            open={isDialogOpen}
             onClose={handleDialogClose}
             userId={userId}
             status={status}
