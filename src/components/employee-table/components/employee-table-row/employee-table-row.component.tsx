@@ -1,9 +1,10 @@
-import { TableCell, TableRow, Typography } from '@material-ui/core';
+import { TableCell } from '@material-ui/core';
 import React, { FC, useState } from 'react';
 import EditIcon from '@material-ui/icons/Edit';
 import { EditStatusDialog } from '../edit-status-dialog';
 import Styled from './employee-table-row.styles';
 import { EmployeeTableRowProps } from './employee-table-row.interface';
+import { isEven } from '../../../../common/helpers/is-even.helper';
 
 const EmployeeRowComponent: FC<EmployeeTableRowProps> = ({
   firstName,
@@ -11,6 +12,7 @@ const EmployeeRowComponent: FC<EmployeeTableRowProps> = ({
   company,
   status,
   userId,
+  rowNumber,
 }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [employeeStatus, setEmployeeStatus] = useState(status);
@@ -24,7 +26,7 @@ const EmployeeRowComponent: FC<EmployeeTableRowProps> = ({
     setEmployeeStatus(changedStatus);
   };
   return (
-    <TableRow key={userId}>
+    <Styled.TableRow key={userId} className={isEven(rowNumber) ? 'grey' : ''}>
       <TableCell>{firstName}</TableCell>
       <TableCell>{lastName}</TableCell>
       <TableCell>{company}</TableCell>
@@ -34,10 +36,12 @@ const EmployeeRowComponent: FC<EmployeeTableRowProps> = ({
             open={isDialogOpen}
             onClose={handleDialogClose}
             userId={userId}
-            status={status}
+            status={employeeStatus}
             onStatusChange={handleStatusChange}
           />
-          <Typography variant="body2">{employeeStatus}</Typography>
+          <Styled.Typography variant="body2">
+            {employeeStatus}
+          </Styled.Typography>
           <Styled.EditButton
             aria-label="Change status"
             onClick={handleEditClick}
@@ -46,7 +50,7 @@ const EmployeeRowComponent: FC<EmployeeTableRowProps> = ({
           </Styled.EditButton>
         </Styled.CellWrapper>
       </TableCell>
-    </TableRow>
+    </Styled.TableRow>
   );
 };
 

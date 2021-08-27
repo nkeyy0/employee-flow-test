@@ -3,9 +3,11 @@ import React, { FC } from 'react';
 import Styled from './progress.styles';
 
 const ProgressComponent: FC = () => (
-  <Styled.ProgressWrapper>
-    <CircularProgress />
-  </Styled.ProgressWrapper>
+  <Styled.ParentWrapper>
+    <Styled.ProgressWrapper>
+      <CircularProgress />
+    </Styled.ProgressWrapper>
+  </Styled.ParentWrapper>
 );
 
 export default ProgressComponent;

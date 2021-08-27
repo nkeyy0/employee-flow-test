@@ -4,4 +4,5 @@ export interface EmployeeTableRowProps {
   company: string;
   userId: string;
   status: string;
+  rowNumber: number;
 }

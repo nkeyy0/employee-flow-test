@@ -1,4 +1,10 @@
-import { IconButton, styled, TableCell } from '@material-ui/core';
+import {
+  IconButton,
+  styled,
+  TableCell,
+  TableRow,
+  Typography,
+} from '@material-ui/core';
 
 const TableColumn = styled(TableCell)({
   display: 'flex',
@@ -14,8 +20,20 @@ const CellWrapper = styled('div')({
   alignItems: 'center',
 });
 
+const StyledTypography = styled(Typography)({
+  width: '80px',
+});
+
+const StyledTableRow = styled(TableRow)({
+  '&.grey': {
+    backgroundColor: '#e0e0e0',
+  },
+});
+
 export default {
   TableCell: TableColumn,
   EditButton,
   CellWrapper,
+  TableRow: StyledTableRow,
+  Typography: StyledTypography,
 };

@@ -1,13 +1,15 @@
-import { Container, CssBaseline } from '@material-ui/core';
+import { CssBaseline, Typography } from '@material-ui/core';
 import React from 'react';
+import { AppContainer } from './common/styles/app.styles';
 import { EmployeeList } from './components/employee-list';
 
 function App() {
   return (
     <CssBaseline>
-      <Container maxWidth="xl">
+      <AppContainer maxWidth="xl">
+        <Typography variant="h3">Employees</Typography>
         <EmployeeList />
-      </Container>
+      </AppContainer>
     </CssBaseline>
   );
 }

@@ -12,9 +12,16 @@ const StyledDialog = styled(Dialog)({
   padding: '40px',
 });
 
-const StyledDialogContent = styled(DialogContent)({
-  padding: '40px',
-});
+const StyledDialogContent = styled(DialogContent)(
+  ({ theme: { breakpoints } }) => ({
+    padding: '40px',
+    [breakpoints.down('sm')]: {
+      '& > span .MuiSlider-markLabel': {
+        fontSize: '0.725rem',
+      },
+    },
+  }),
+);
 
 export default {
   DialogTitle,
