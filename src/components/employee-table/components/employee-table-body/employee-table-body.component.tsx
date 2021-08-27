@@ -7,7 +7,7 @@ const EmployeeTableBodyComponent: FC<EmployeeTableBodyProps> = ({ rows }) => (
   <TableBody>
     {rows.map(({
       id, firstName, lastName, company, status,
-    }) => (
+    }, rowNumber) => (
       <EmployeeRow
         key={id}
         userId={id}
@@ -15,6 +15,7 @@ const EmployeeTableBodyComponent: FC<EmployeeTableBodyProps> = ({ rows }) => (
         lastName={lastName}
         company={company}
         status={status}
+        rowNumber={rowNumber}
       />
     ))}
   </TableBody>

@@ -2,48 +2,23 @@ import React, {
   FC, ChangeEvent, useState, useEffect,
 } from 'react';
 import {
-  Typography,
-  IconButton,
-  Slider,
-  Mark,
-  Snackbar,
+  Typography, IconButton, Slider, Snackbar,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
 import { EditStatusDialogProps } from './edit-status-dialog.interface';
 import Styled from './edit-status-dialog.styles';
-import { EmployeeStatus } from '../../../../common/constants/employee-status.enum';
 import { CONFIG } from '../../../../common/constants/config';
 import { ApiRoutes } from '../../../../common/constants/api-routes.enum';
 import { getMarkValue } from '../../../../common/helpers/get-mark-value.helper';
 import { Employee } from '../../../../common/interfaces/employee.interface';
-
-const marks: Mark[] = [
-  {
-    value: 0,
-    label: EmployeeStatus.ADDED,
-  },
-  {
-    value: 1,
-    label: EmployeeStatus.IN_CHECK,
-  },
-  {
-    value: 2,
-    label: EmployeeStatus.APPROVED,
-  },
-  {
-    value: 3,
-    label: EmployeeStatus.ACTIVE,
-  },
-  {
-    value: 4,
-    label: EmployeeStatus.INACTIVE,
-  },
-];
-
-function valueText(value: number) {
-  return `${value}`;
-}
+import {
+  ERROR_MESSAGE,
+  marks,
+  MAX_STEP,
+  MIN_STEP,
+  NOTIFICATION_DURATION,
+} from './edit-status.constants';
 
 function valueLabelFormat(value: number) {
   return marks.findIndex((mark) => mark.value === value) + 1;
@@ -57,6 +32,7 @@ const EditStatusDialogComponent: FC<EditStatusDialogProps> = ({
   onStatusChange,
 }) => {
   const [mark, setMark] = useState(status);
+  const [statusValue, setStatusValue] = useState(status);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
   useEffect(() => {
@@ -79,12 +55,20 @@ const EditStatusDialogComponent: FC<EditStatusDialogProps> = ({
     fetchStatus();
   }, [mark, onStatusChange, userId]);
 
+  const handleStatusChange = (
+    event: ChangeEvent<{}>,
+    value: number | number[],
+  ) => {
+    const findMark = marks[value as number];
+    setMark(findMark?.label as string);
+  };
+
   const handleSliderChange = (
     event: ChangeEvent<{}>,
     value: number | number[],
   ) => {
     const findMark = marks[value as number];
-    setMark(findMark.label as string);
+    setStatusValue(findMark?.label as string);
   };
 
   const handleSnackbarClose = () => {
@@ -102,18 +86,20 @@ const EditStatusDialogComponent: FC<EditStatusDialogProps> = ({
         <Snackbar
           open={isSnackbarOpen}
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-          autoHideDuration={2000}
-          message="Something went wrong"
+          autoHideDuration={NOTIFICATION_DURATION}
+          message={ERROR_MESSAGE}
           onClose={handleSnackbarClose}
         />
         <Slider
           defaultValue={getMarkValue(marks, mark)}
           marks={marks}
-          min={0}
-          max={4}
+          min={MIN_STEP}
+          max={MAX_STEP}
           valueLabelFormat={valueLabelFormat}
-          getAriaValueText={valueText}
-          onChangeCommitted={handleSliderChange}
+          getAriaValueText={(value) => String(value)}
+          onChangeCommitted={handleStatusChange}
+          onChange={handleSliderChange}
+          value={getMarkValue(marks, statusValue)}
         />
       </Styled.DialogContent>
     </Styled.Dialog>
